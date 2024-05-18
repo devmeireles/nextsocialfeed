@@ -21,37 +21,37 @@
 //     }
 // }
 
-
-import {NextResponse} from "next/server";
+import { NextResponse } from 'next/server';
 
 export async function GET(req: Request, res: Response) {
-    // return NextResponse.json({
-    //     message: 'Hello, world!'
-    // })
+  // return NextResponse.json({
+  //     message: 'Hello, world!'
+  // })
 
-    try {
-        const response = await fetch('https://stoplight.io/mocks/engine/fullstack-spec/52502230/content', {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Prefer': 'code=200'
-            }
-        });
+  try {
+    const response = await fetch(
+      'https://stoplight.io/mocks/engine/fullstack-spec/52502230/content',
+      {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          Prefer: 'code=200',
+        },
+      }
+    );
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-
-        return NextResponse.json({
-            data,
-        })
-
-
-    } catch (error) {
-        return NextResponse.json({
-            error: 'An error occurred while fetching the feed'
-        });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
+
+    const data = await response.json();
+
+    return NextResponse.json({
+      data,
+    });
+  } catch (error) {
+    return NextResponse.json({
+      error: 'An error occurred while fetching the feed',
+    });
+  }
 }

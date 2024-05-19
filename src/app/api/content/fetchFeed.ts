@@ -1,7 +1,10 @@
-const fetchField = async () => {
+import { feedTransformer } from '@/helpers/feedTransformer';
+
+const fetchFeed = async () => {
   const res = await fetch('/api/content');
-  const data = await res.json();
+  const { data } = await res.json();
+
   return data;
 };
 
-export default fetchField;
+export default fetchFeed;

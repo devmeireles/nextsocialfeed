@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { TanstackProvider } from '@/providers/TanstackProvider';
 import React from 'react';
+import classNames from 'classnames';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -16,7 +17,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang='en'>
-      <body className={inter.className}>
+      <body className={classNames(inter.className, 'bg-white')}>
         <TanstackProvider>{children}</TanstackProvider>
       </body>
     </html>

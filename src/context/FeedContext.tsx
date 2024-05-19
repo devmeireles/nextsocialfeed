@@ -1,7 +1,8 @@
-import INews from '@/types/INews';
 import React from 'react';
+import INews from '@/types/INews';
 import { useQuery } from '@tanstack/react-query';
-import fetchField from '@/app/api/content/fetchFeed';
+import fetchFeed from '@/app/api/content/fetchFeed';
+import { feedTransformer } from '@/helpers/feedTransformer';
 
 interface FeedContextProps {
   children: React.ReactNode;
@@ -11,12 +12,14 @@ interface IFeedContext {
   news: INews[] | [];
   isLoading: boolean;
   isFetching: boolean;
+  error: Error | null;
 }
 
 const defaultState: IFeedContext = {
   news: [],
   isLoading: false,
   isFetching: false,
+  error: null,
 };
 
 const FeedContext = React.createContext<IFeedContext>(defaultState);
@@ -30,17 +33,16 @@ const useFeedContext = (): IFeedContext => {
 };
 
 const FeedProvider: React.FC<FeedContextProps> = ({ children }) => {
-  const feedQuery = useQuery({
+  const { data, isLoading, isFetching, error } = useQuery({
     queryKey: ['country'],
-    queryFn: async () => fetchField(),
+    queryFn: async () => fetchFeed(),
   });
 
-  const feedContent = feedQuery.data ?? [];
-
   const contextValues = {
-    news: feedContent,
-    isLoading: feedQuery.isLoading,
-    isFetching: feedQuery.isFetching,
+    news: data ? feedTransformer(data) : [],
+    isLoading,
+    isFetching,
+    error,
   };
 
   return (

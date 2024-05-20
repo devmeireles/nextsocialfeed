@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import config from '@/helpers/config';
 
-export async function GET(req: Request, res: Response) {
+export async function GET() {
   try {
     const response = await fetch(config.apiFeedUrl, {
       method: 'GET',
@@ -21,6 +21,7 @@ export async function GET(req: Request, res: Response) {
       data: data.contentCards,
     });
   } catch (error) {
+    console.log(error)
     return NextResponse.json({
       error: 'An error occurred while fetching the feed',
     });

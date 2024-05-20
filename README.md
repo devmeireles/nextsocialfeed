@@ -1,4 +1,12 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+The objective of this challenge is to showcase the Next.js proficiency in both backend and frontend development, as well as the ability to integrate APIs effectively.
+By developing this full-stack application, we demonstrate the integration retrieving data from a private API, processing it on the backend, and presenting it in an intuitive and user-friendly format on the frontend.
+
+## Table of Contents
+
+- [Getting Started](#Getting Started)
+- [Stack](#stack)
+- [Test](#test)
+- [API](#api)
 
 ## Getting Started
 
@@ -16,21 +24,62 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Stack
+ - Next.js
+ - TypeScript
+ - Jest
+ - React Testing Library
+ - Tailwind
+ - Eslint
+ - Prettier
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Test
 
-## Learn More
+```bash
+npm run test
+# or
+yarn test
+# or
+pnpm test
+# or
+bun test
+```
 
-To learn more about Next.js, take a look at the following resources:
+## API
+To fetch the content feed, send a GET request to the /api/content route.
+- **GET /api/content**: Retrieves the feed of content cards.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Response
+The response will contain an array of content cards.
+Example Response:
+```json
+{
+  "data": [
+    {
+      "id": "1",
+      "imageUri": "https://example.com/image1.jpg",
+      "textData": {
+        "title": "Title 1",
+        "subTitle": "Subtitle 1",
+        "body": "Body 1",
+        "author": {
+          "first": "John",
+          "last": "Doe"
+        }
+      },
+      "metadata": {
+        "priority": 2,
+        "publishDate": "2022-05-20T12:00:00Z"
+      },
+      "comments": [
+        {
+          "text": "Comment 1",
+          "author": "Alice",
+          "profilePic": "https://example.com/profile1.jpg",
+          "likes": 5
+        }
+      ]
+    }
+  ]
+}
+```
